@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зворотній зв'язок</title>
+
+    <style>
+        /* Основні стилі для розташування */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+        }
+
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            color: #003399;
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #003366;
+        }
+
+        .view-questions-button {
+            background-color: #28a745;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-questions-button:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 1.2rem;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Стилі для кнопок "Головна" та "Часті запитання" */
+        .nav-buttons {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-buttons button {
+            padding: 1rem 2rem;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Зворотній зв'язок</h1>
+    </header>
+    <main>
+        <section class="contact-form">
+            <h2>Напишіть нам</h2>
+            <form id="contactForm">
+                <label for="name">Ім'я:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Електронна пошта:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Повідомлення:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <button type="submit">Відправити</button>
+            </form>
+
+            <!-- Кнопка для перегляду запитань переміщена вниз -->
+            <button onclick="viewQuestions()" class="view-questions-button">Переглянути запитання</button>
+        </section>
+
+        <!-- Кнопки навігації -->
+        <div class="nav-buttons">
+            <button onclick="window.location.href='index.html'">Головна</button>
+            <button onclick="window.location.href='faq.html'">Часті запитання</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Підтримка ветеранів України</p>
+    </footer>
+
+    <script>
+        // Функція для збереження запитання в localStorage
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            let questions = JSON.parse(localStorage.getItem('questions')) || [];
+            questions.push({ name, email, message });
+            localStorage.setItem('questions', JSON.stringify(questions));
+
+            // Очистка форми
+            document.getElementById('contactForm').reset();
+            alert('Ваше запитання надіслано!');
+        });
+
+        // Функція для перевірки пароля та перегляду запитів
+        function viewQuestions() {
+            const password = prompt("Введіть пароль для перегляду запитів:");
+
+            if (password === "Гаврик") {
+                window.location.href = 'contact-data.html';
+            } else {
+                alert("Невірний пароль!");
+            }
+        }
+    </script>
+</body>
+</html>

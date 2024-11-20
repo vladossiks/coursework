@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перегляд запитів</title>
+    <style>
+        /* Основні стилі для розташування */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Стилі для таблиці з запитами */
+        .data-table {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table table, .data-table th, .data-table td {
+            border: 1px solid #ccc;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        /* Кнопка навігації */
+        .nav-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .nav-buttons button {
+            padding: 0.7rem 2rem;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Перегляд запитів</h1>
+    </header>
+    <main>
+        <section class="data-table">
+            <h2>Збережені запитання:</h2>
+            <table id="questionsTable">
+                <thead>
+                    <tr>
+                        <th>Ім'я</th>
+                        <th>Електронна пошта</th>
+                        <th>Повідомлення</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- Кнопки навігації -->
+        <div class="nav-buttons">
+            <button onclick="window.location.href='index.html'">Головна</button>
+            <button onclick="window.location.href='contact.html'">Зворотній зв'язок</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Підтримка ветеранів України</p>
+    </footer>
+
+    <script>
+        // Функція для завантаження і відображення запитів з localStorage
+        window.onload = function() {
+            const questions = JSON.parse(localStorage.getItem('questions')) || [];
+            const tableBody = document.querySelector('#questionsTable tbody');
+
+            questions.forEach(question => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${question.name}</td>
+                    <td>${question.email}</td>
+                    <td>${question.message}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        };
+    </script>
+</body>
+</html>
