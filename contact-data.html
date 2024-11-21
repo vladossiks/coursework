@@ -41,7 +41,7 @@
 
         main {
             flex: 1;
-            padding: 2rem;
+            padding: 1rem;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -49,10 +49,10 @@
         /* Стилі для таблиці з запитами */
         .data-table {
             background-color: #f9f9f9;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .data-table table {
@@ -65,8 +65,9 @@
         }
 
         .data-table th, .data-table td {
-            padding: 1rem;
+            padding: 0.5rem;
             text-align: left;
+            font-size: 0.9rem;
         }
 
         /* Кнопка навігації */
@@ -76,18 +77,50 @@
         }
 
         .nav-buttons button {
-            padding: 0.7rem 2rem;
+            padding: 0.5rem 1rem;
             background-color: #004080;
             color: white;
             border: none;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            margin: 0 10px;
+            margin: 0 5px;
+            font-size: 0.9rem;
         }
 
         .nav-buttons button:hover {
             background-color: #003366;
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .data-table {
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+
+            .data-table th, .data-table td {
+                font-size: 0.8rem;
+                padding: 0.4rem;
+            }
+
+            .nav-buttons button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+                margin: 0 3px;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>

@@ -123,11 +123,12 @@
             font-size: 0.9rem;
         }
 
-        /* Стилі для кнопок "Головна" та "Часті запитання" */
         .nav-buttons {
             margin-top: 3rem;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .nav-buttons button {
@@ -138,12 +139,56 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            margin: 0 1rem;
+            font-size: 1rem;
             transition: background-color 0.3s ease;
         }
 
         .nav-buttons button:hover {
             background-color: #003366;
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .contact-form h2 {
+                font-size: 1.4rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-form button {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .view-questions-button {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .nav-buttons button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -167,11 +212,9 @@
                 <button type="submit">Відправити</button>
             </form>
 
-            <!-- Кнопка для перегляду запитань переміщена вниз -->
             <button onclick="viewQuestions()" class="view-questions-button">Переглянути запитання</button>
         </section>
 
-        <!-- Кнопки навігації -->
         <div class="nav-buttons">
             <button onclick="window.location.href='index.html'">Головна</button>
             <button onclick="window.location.href='faq.html'">Часті запитання</button>
@@ -183,7 +226,6 @@
     </footer>
 
     <script>
-        // Функція для збереження запитання в localStorage
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -195,12 +237,10 @@
             questions.push({ name, email, message });
             localStorage.setItem('questions', JSON.stringify(questions));
 
-            // Очистка форми
             document.getElementById('contactForm').reset();
             alert('Ваше запитання надіслано!');
         });
 
-        // Функція для перевірки пароля та перегляду запитів
         function viewQuestions() {
             const password = prompt("Введіть пароль для перегляду запитів:");
 
